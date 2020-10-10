@@ -1,8 +1,7 @@
 # LeetCode
 
-Platform: VSCode
-Language: C++
+LeecCode Solution
 
-![圖片名稱](https://img.shields.io/static/v1.svg?label=left&message=right&color=red "游標顯示")
-
+![platformImg](https://img.shields.io/static/v1.svg?label=Editor&message=VSCode&color=red)
+![languageImg](https://img.shields.io/static/v1.svg?label=Language&message=C++&color=red)
 
