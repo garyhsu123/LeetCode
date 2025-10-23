@@ -7,7 +7,7 @@
 // @lc code=start
 class Solution {
     // T.C. = O(N)
-    // S.C. = O()
+    // S.C. = O(1)
     func search(_ nums: [Int], _ target: Int) -> Int {
         var startIndex = 0
         var lastIndex = nums.count - 1
