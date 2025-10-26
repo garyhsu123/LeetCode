@@ -34,29 +34,35 @@
  * }
  */
 class Solution {
+    var firstNode: TreeNode?
+    var secondNode: TreeNode?
+    var preNode = TreeNode(Int.min)
+
+    // T.C. = O(N)
+    // S.C. = O(1)
     func recoverTree(_ root: TreeNode?) {
-        var inOrder = inOrder(root)
-        var sorted = inOrder.sorted()
-        var index = 0
-        recover(root, sorted: sorted, index: &index)
+        traverse(root)
+
+        if let firstNode, let secondNode {
+            let firstNodeValue = firstNode.val
+            firstNode.val = secondNode.val
+            secondNode.val = firstNodeValue
+        }
     }
 
-    func recover(_ root: TreeNode?, sorted: [Int], index: inout Int) {
-        guard let root else { return }
-        recover(root.left, sorted: sorted, index: &index)
-        root.val = sorted[index]
-        index += 1
-        recover(root.right, sorted: sorted, index: &index)   
-    }
+    func traverse(_ node: TreeNode?) {
+        guard let node else { return }
 
-    func inOrder(_ root: TreeNode?) -> [Int] {
-        guard let root else { return [] }
+        traverse(node.left)
 
-        var inOrderNodes: [Int] = []
-        inOrderNodes += inOrder(root.left)
-        inOrderNodes += [root.val]
-        inOrderNodes += inOrder(root.right)
-        return inOrderNodes
+        if firstNode == nil, preNode.val > node.val { 
+            firstNode = preNode
+            secondNode = node
+        }
+        else if firstNode != nil, preNode.val > node.val { secondNode = node }
+        preNode = node
+
+        traverse(node.right)
     }
 }
 // @lc code=end
