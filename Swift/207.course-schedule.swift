@@ -6,58 +6,94 @@
 
 // @lc code=start
 class Solution {
+    // Kahn's algorithm
     func canFinish(_ numCourses: Int, _ prerequisites: [[Int]]) -> Bool {
-        var graph = [Int: Set<Int>]()
-        buildGraph(prerequisites, graph: &graph)
-        //print(graph)
-        return !checkIfCycle(numCourses, graph: graph)
+        var graph: [Int: [Int]] = [:]
+        var inDegree: [Int] = [Int](repeating: 0, count: numCourses)
+
+        for prerequisiteMap in prerequisites {
+            let course = prerequisiteMap[0]
+            let prerequisite = prerequisiteMap[1]
+            graph[prerequisite, default: []].append(course)
+            inDegree[course] += 1
+        }
+
+        var queue: [Int] = []
+        for (i, degree) in inDegree.enumerated() {
+            if degree == 0 {
+                queue.append(i)
+            }
+        }
+
+        var topologicalOrder: [Int] = []
+        while !queue.isEmpty {
+            let current = queue.removeFirst()
+            topologicalOrder.append(current)
+
+            for neighbor in graph[current, default: []] {
+                inDegree[neighbor] -= 1
+                if inDegree[neighbor] == 0 {
+                    queue.append(neighbor)
+                }
+            }
+        }
+
+        return topologicalOrder.count == numCourses
     }
 
-    func buildGraph(_ prerequisites: [[Int]], graph: inout [Int: Set<Int>]) {
-        for edge in prerequisites {
-            let target = edge[0]
-            let dependent = edge[1]
+    // DFS
+    // func canFinish(_ numCourses: Int, _ prerequisites: [[Int]]) -> Bool {
+    //     var graph = [Int: Set<Int>]()
+    //     buildGraph(prerequisites, graph: &graph)
+    //     //print(graph)
+    //     return !checkIfCycle(numCourses, graph: graph)
+    // }
 
-            var dependents = graph[target] ?? Set<Int>()
-            dependents.insert(dependent)
+    // func buildGraph(_ prerequisites: [[Int]], graph: inout [Int: Set<Int>]) {
+    //     for edge in prerequisites {
+    //         let target = edge[0]
+    //         let dependent = edge[1]
+
+    //         var dependents = graph[target] ?? Set<Int>()
+    //         dependents.insert(dependent)
             
-            graph[target] = dependents
-        }
-    }
+    //         graph[target] = dependents
+    //     }
+    // }
 
-    private func checkIfCycleUtil(nodeIndex: Int, graph: [Int: Set<Int>], visited: inout [Bool], recStack: inout [Bool]) -> Bool {
-        //print("nodeIndex: \(nodeIndex)")
-        if visited[nodeIndex] { return false }
+    // private func checkIfCycleUtil(nodeIndex: Int, graph: [Int: Set<Int>], visited: inout [Bool], recStack: inout [Bool]) -> Bool {
+    //     //print("nodeIndex: \(nodeIndex)")
+    //     if visited[nodeIndex] { return false }
         
-        visited[nodeIndex] = true
-        recStack[nodeIndex] = true
+    //     visited[nodeIndex] = true
+    //     recStack[nodeIndex] = true
 
-        guard let adjs = graph[nodeIndex] else {
-            recStack[nodeIndex] = false
-            return false
-        }
+    //     guard let adjs = graph[nodeIndex] else {
+    //         recStack[nodeIndex] = false
+    //         return false
+    //     }
 
-        for adj in adjs {
-            if recStack[adj] || checkIfCycleUtil(nodeIndex: adj, graph: graph, visited: &visited, recStack: &recStack) {
-                return true
-            }
-        }
-        recStack[nodeIndex] = false
-        return false
-    }
+    //     for adj in adjs {
+    //         if recStack[adj] || checkIfCycleUtil(nodeIndex: adj, graph: graph, visited: &visited, recStack: &recStack) {
+    //             return true
+    //         }
+    //     }
+    //     recStack[nodeIndex] = false
+    //     return false
+    // }
 
-    func checkIfCycle(_ numCourses: Int, graph: [Int: Set<Int>]) -> Bool {
-        var visited = [Bool].init(repeating: false, count: numCourses)
-        var recStack = [Bool].init(repeating: false, count: numCourses)
+    // func checkIfCycle(_ numCourses: Int, graph: [Int: Set<Int>]) -> Bool {
+    //     var visited = [Bool].init(repeating: false, count: numCourses)
+    //     var recStack = [Bool].init(repeating: false, count: numCourses)
 
-        while let beginNodeIndex = graph.first(where: { key, value in !visited[key] })?.key {
-            //print("beginNodeIndex: \(beginNodeIndex)")
-            if checkIfCycleUtil(nodeIndex: beginNodeIndex, graph: graph, visited: &visited, recStack: &recStack) {
-                return true
-            }
-        }
-        return false
-    }
+    //     while let beginNodeIndex = graph.first(where: { key, value in !visited[key] })?.key {
+    //         //print("beginNodeIndex: \(beginNodeIndex)")
+    //         if checkIfCycleUtil(nodeIndex: beginNodeIndex, graph: graph, visited: &visited, recStack: &recStack) {
+    //             return true
+    //         }
+    //     }
+    //     return false
+    // }
 }
 // @lc code=end
 
