@@ -5,20 +5,24 @@
  */
 
 using namespace std;
+#include <map>
 #include <vector>
-
 // @lc code=start
+// T.C. = O(N)
+// S.C. = O(N)
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int a, b;
-        for (int i = 0; i < nums.size()-1; ++i) {
-            for (int j = i + 1; j < nums.size(); ++j) {
-                if (nums[i] + nums[j] == target)
-                    return vector<int> {i, j};
+        map<int, int> numMap;
+        for (int i = 0; i < nums.size(); i++) {
+            int counterpart = target - nums[i];
+            if (numMap.find(counterpart) != numMap.end()) {
+                return {numMap[counterpart], i};
             }
+            numMap[nums[i]] = i;
         }
-        return vector<int>{};
+        
+        return {};
     }
 };
 // @lc code=end
