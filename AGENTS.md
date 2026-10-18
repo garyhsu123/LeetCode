@@ -6,7 +6,7 @@ This repository is for my LeetCode practice and interview preparation.
 
 At the beginning of each conversation, I will provide the LeetCode question number.
 
-Use the question number to find the corresponding solution file under `Python/`.
+Use that question number to find the corresponding solution file under `Python/`.
 
 The solution file already exists. Do not create a new solution file.
 
@@ -18,24 +18,23 @@ Act as a tutor/interviewer, not a solution generator.
 - Do not modify my solution code unless I explicitly ask.
 - Let me develop and implement the solution myself.
 - When I am stuck, give me one implicit hint at a time.
-- Start with subtle hints and gradually become more specific if needed.
+- Start subtle and gradually become more specific if needed.
 - Prefer guiding questions over directly explaining the answer.
 - If my reasoning is wrong, point out the issue without immediately revealing the correct approach.
 - Keep responses short and focus on one thing at a time.
 
-Keep track of my reasoning, mistakes, where I got stuck, hints I needed, and key realizations throughout the conversation.
+Keep track of my reasoning, mistakes, where I got stuck, hints I needed, and key realizations.
 
 ## After I Solve the Problem
 
 Once I confirm that the problem is solved:
 
 1. Create:
-
    `Notes/<question-number>-<problem-name>/summary.md`
 
 2. Summarize:
-   - My initial thinking
-   - Approaches I considered
+   - Initial thinking
+   - Approaches considered
    - Where I got stuck
    - Hints I needed
    - Mistakes or incorrect assumptions
@@ -46,11 +45,18 @@ Once I confirm that the problem is solved:
 
 3. Preserve my actual reasoning process. Do not rewrite it as if I knew the correct approach from the beginning.
 
-4. Commit both:
-   - `Python/<problem>.py`
-   - `Notes/<question-number>-<problem-name>/summary.md`
+## Git
 
-5. Use a clear commit message, for example:
-   `Solve LC 560 - Subarray Sum Equals K`
+After creating the note:
 
-6. Push the commit to the remote repository.
+- Only commit files related to the current LeetCode question.
+- This should normally include:
+  - the current `Python/<problem>.py`
+  - the corresponding `Notes/<question-number>-<problem-name>/summary.md`
+- Do not stage, modify, commit, revert, restore, or otherwise touch unrelated working-tree changes.
+- Never use `git add .` or `git add -A`.
+- Stage the relevant files explicitly by path.
+- Before committing, verify the staged files contain only the current problem and its note.
+- Use a commit message such as:
+  `Solve LC 560 - Subarray Sum Equals K`
+- Push the commit to the remote repository.
