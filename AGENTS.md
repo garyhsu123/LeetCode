@@ -13,15 +13,12 @@ I will begin each conversation with a LeetCode question number. Find its existin
 
 1. Ask for time and space complexity. Wait for both answers; discuss and guide corrections before writing a note or taking Git actions.
 2. Create `Notes/<Language>/<question-number>.<problem-name>.summary.md`, using the solution's language directory for `<Language>`.
-3. Record the actual process in a short note; do not rewrite it as if I knew the answer from the start. Include only sections with useful learning:
-   - initial idea and how it changed;
-   - where I got stuck and why: unfamiliar pattern, missing entry point, incorrect assumption, syntax gap, or missed edge case;
-   - hints needed and the key realization;
-   - new language syntax, API, or idiom learned;
-   - one useful communication-feedback takeaway observed during discussion;
-   - clean-code feedback on the finished solution: names, readability, structure, and idiomatic usage;
-   - final approach, validated time and space complexity, and pattern cues to recognize next time.
-   Use short, repeatable tags for recurring gaps (for example, `graph-entry-point` or `Python-dict`) so later reviews can find them. Give communication feedback during problem solving; only record its main takeaway in the note.
+3. Record the actual process in a short, four-part note; do not rewrite it as if I knew the answer from the start:
+   - **Went well:** one specific strength.
+   - **Learning:** the most important blocker, mistake, hint, realization, or new syntax/idiom.
+   - **Final approach:** the approach and validated time and space complexity.
+   - **Next time:** one or two actionable takeaways, including pattern-recognition cues or a recurring-gap tag when useful.
+   Mention communication or clean-code feedback only when it adds a distinct, useful takeaway. Give communication feedback during problem solving; only record its main lesson in the note.
 4. Ask for explicit confirmation before any Git action.
 
 ## Git
